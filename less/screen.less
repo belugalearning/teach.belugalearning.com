@@ -3,10 +3,7 @@
 .pseudo-states(@base-color) when (lightness(@base-color) >= 50%) {
 	color: @base-color;
 
-	&:hover {
-		color: darken(@base-color, 10%);
-	}
-
+	&:hover,
 	&:active {
 		color: darken(@base-color, 15%);
 	}
@@ -15,10 +12,7 @@
 .pseudo-states(@base-color) when (lightness(@base-color) < 50%) {
 	color: @base-color;
 
-	&:hover {
-		color: lighten(@base-color, 10%);
-	}
-
+	&:hover,
 	&:active {
 		color: lighten(@base-color, 15%);
 	}
@@ -55,12 +49,12 @@ header[role=primary] {
 		float: left;
 		text-indent: -9999px;
 		background: url(../img/logo.png) center center no-repeat;
-		width: 200px;
-		height: 100px;
+		width: 250px;
+		height: 60px;
 	}
 	nav[role=main] {
 		ul {
-			margin: 15px 0 0 10px;
+			margin: 25px 0 0 10px;
 			list-style: none;
 
 			li,
@@ -82,10 +76,15 @@ header[role=primary] {
 			}
 
 			a {
-				.pseudo-states(#fff);
 				margin-left: -5px;
 				padding: 5px 20px;
 				border: 1px solid #555555;
+				text-decoration: none;
+				color: #fff;
+				&:hover,
+				&:active {
+					color: #fff;
+				}
 
 				&:hover {
 					background: lighten(@bg-color, 20%);
