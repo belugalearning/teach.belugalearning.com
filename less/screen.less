@@ -28,7 +28,6 @@
 	box-shadow: @shadow;
 }
 
-
 body {
 	background: #E6E6E6;
 }
@@ -37,6 +36,10 @@ h1 {
 	font-weight: 300;
 	font-size: 1.7em;
 	letter-spacing: 1px;
+}
+
+.wrapper {
+	position: relative;
 }
 
 header[role=primary] {
@@ -93,6 +96,11 @@ header[role=primary] {
 
 section[role=sidebar] {
 	border-right: 1px solid #3C3C3C;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	margin-left: 0 !important;
 }
 
 section[role=main] {
