@@ -1,7 +1,4 @@
-@import 'type.less';
-
 body {
-	#type > .grid();
 }
 
 header[role=primary] {
@@ -9,4 +6,25 @@ header[role=primary] {
 	background: #191919;
 	color: #fff;
 	overflow: auto;
+}
+
+section[role=sidebar] {
+	background: #eee;
+}
+
+ul.tags {
+	margin-left: 0;
+	list-style: none;
+	li,
+	a {
+		display: inline-block;
+	}
+
+	a {
+		background: #F5F5F5;
+		border-radius: 10px;
+		padding: 5px 10px;
+		margin-right: 3px;
+		margin-bottom: 5px;
+	}
 }
