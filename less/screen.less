@@ -11,6 +11,7 @@
 		color: darken(@base-color, 15%);
 	}
 }
+
 .pseudo-states(@base-color) when (lightness(@base-color) < 50%) {
 	color: @base-color;
 
@@ -118,12 +119,17 @@ section[role=main] {
 }
 
 .tool {
+	position: relative;
+	max-width: 310px;
+	@margin-left: 10px;
 	.content {
 		background: #fff;
 		border-radius: 5px;
 		padding: 7px 5px 1px;
 		.box-shadow(0px 2px 5px rgba(0, 0, 0, 0.1));
 		margin-bottom: 20px;
+		margin-left: @margin-left;
+		margin-right: 5px;
 		h3 {
 			color: #8F8F8F;
 			font-weight: 100;
@@ -131,10 +137,19 @@ section[role=main] {
 			padding: 0 10px;
 		}
 	}
+	.tags {
+		margin-left: @margin-left;
+	}
+	.comingsoon {
+		position: absolute;
+		max-width: 310px;
+		width: 100%;
+		left: 0px;
+		top: 20px;
+	}
 }
 
 ul.tags {
-	margin-left: 0;
 	list-style: none;
 	li,
 	a {
