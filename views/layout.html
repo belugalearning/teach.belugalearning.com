@@ -32,5 +32,16 @@
             </div>
             {% endblock %}
         </div>
+        <script type="text/javascript" src="/components/jquery/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('section[role=main]').height(function () {
+                    return $(window).height() - $('header[role=primary]').height();
+                });
+                $('iframe').height(function () {
+                    return $(window).height() - $('header[role=primary]').height();
+                });
+            });
+        </script>
     </body>
 </html>
