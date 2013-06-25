@@ -97,10 +97,9 @@ app.get('/', function(req, res) {
             image: 'preview_counting-timer-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'counting up',
+                'counting down',
+                'counting on'
             ]
         },
         {
@@ -108,10 +107,8 @@ app.get('/', function(req, res) {
             image: 'preview_pie-splitter-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'fractions',
+                'splitting'
             ]
         },
         {
@@ -119,10 +116,10 @@ app.get('/', function(req, res) {
             image: 'preview_place-value-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'place value',
+                'tens',
+                'hundreds',
+                'decimals'
             ]
         },
         {
@@ -152,10 +149,11 @@ app.get('/', function(req, res) {
             image: 'preview_number-line-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'counting up',
+                'counting down',
+                'addition',
+                'subraction',
+                'repeated multiplication'
             ]
         },
         {
@@ -163,10 +161,10 @@ app.get('/', function(req, res) {
             image: 'preview_dot-grid-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'shapes',
+                'multiplication',
+                'square',
+                'rectangle'
             ]
         },
         {
@@ -174,10 +172,8 @@ app.get('/', function(req, res) {
             image: 'preview_long-division-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'division',
+                'sharing'
             ]
         }
     ];
