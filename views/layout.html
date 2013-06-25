@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="/components/bootstrap/docs/assets/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/screen.css">
+    </head>
+    <body class="{% block bodyclass %}{% endblock %}">
+        <header role="primary" class="container-fluid">
+            <div class="row-fluid">
+                <h1>Beluga Learning</h1>
+                <nav role="main" class="span8">
+                    <ul>
+                        <li>
+                            <a href="/">Teach Maths</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="container-fluid wrapper">
+            {% block body %}
+            <div class="row-fluid">
+                <section role="main" class="span10 offset2">
+                    {% block content %}{% endblock %}
+                </section>
+                <section role="sidebar" class="span2">
+                </section>
+            </div>
+            {% endblock %}
+        </div>
+    </body>
+</html>

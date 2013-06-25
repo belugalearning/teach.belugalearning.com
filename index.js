@@ -1,5 +1,7 @@
 var util = require('util')
   , fs = require('fs')
+  , cons = require('consolidate')
+  , swig = require('swig')
   , express = require('express')
   , seaport = require('seaport')
 ;
@@ -17,31 +19,32 @@ app.use(express.session({
 }))
 app.use(express.bodyParser())
 
-// app.all('*', function(req, res, next) {
-//   if (req.session.authenticated || (req.method == 'GET' && /^\/(shared-resources|res)\/.*\.png/.test(req.url))) return next()
+app.engine('.html', cons.swig);
+app.set('view engine', 'html');
 
-//   if (req.method == 'GET') {
-//     return res.send(fs.readFileSync(__dirname + '/sign-in.html', 'utf8'))
-//   }
-
-//   if (req.method == 'POST' && req.url == '/sign-in') {
-//     if (req.body.password == 'thisisnotalovesong') {
-//       req.session.authenticated = true
-//     }
-//     return res.redirect('/')
-//   }
-
-//   res.send(403)
-//   console.log(req.sessionID, req.url, req.session.authenticated)
-// })
+// NOTE: Swig requires some extra setup
+// This helps it know where to look for includes and parent templates
+swig.init({
+    root: 'views/',
+    allowErrors: true // allows errors to be thrown and caught by express instead of suppressed by Swig
+});
+app.set('views', 'views/');
 
 
 app.use(express.static(__dirname))
-app.use('/tools/', express.static(__dirname + '/components/tools-basis/web-client'))
-app.use('/tools/geoboard/', express.static(__dirname + '/components/tools-basis/web-client/host'))
+app.use('/web-client/', express.static(__dirname + '/components/tools-basis/web-client'))
+app.use('/web-client/host', express.static(__dirname + '/components/tools-basis/web-client/host'))
 app.use('/host-helpers/', express.static(__dirname + '/components/tools-basis/host-helpers'))
 app.use('/shared-resources/', express.static(__dirname + '/components/tools-basis/shared-resources'))
 app.use('/tools-tests', express.static(__dirname + '/components/tools-basis/tools-tests'))
+
+app.get('/', function(req, res) {
+    res.render('index', {});
+});
+
+app.get('/tools/geoboard/', function(req, res) {
+    res.render('geoboard', {});
+});
 
 var ports = seaport.connect('127.0.0.1', 9090)
 var port = localise ? 3333 : ports.register(seaportServiceName)
