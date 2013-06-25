@@ -127,10 +127,8 @@ app.get('/', function(req, res) {
             image: 'preview_times-table-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'muliplication',
+                'muliplicative relationships'
             ]
         },
         {
@@ -138,10 +136,10 @@ app.get('/', function(req, res) {
             image: 'preview_number-bonds-tool.png',
             link: '',
             tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
+                'addition',
+                'repeated addition',
+                'decimals',
+                'place value'
             ]
         },
         {
