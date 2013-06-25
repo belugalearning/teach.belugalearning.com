@@ -1,0 +1,8 @@
+{
+  "name": "teach",
+  "version": "0.0.1",
+  "devDependencies": {
+    "normalize-css": "~2.1.2",
+    "bootstrap": "~2.3.2"
+  }
+}
