@@ -39,11 +39,11 @@ app.use('/shared-resources/', express.static(__dirname + '/components/tools-basi
 app.use('/tools-tests', express.static(__dirname + '/components/tools-basis/tools-tests'))
 
 app.get('/', function(req, res) {
-    res.render('index', {});
+    res.render('index.html', {});
 });
 
 app.get('/tools/geoboard/', function(req, res) {
-    res.render('geoboard', {});
+    res.render('geoboard.html', {});
 });
 
 var ports = seaport.connect('127.0.0.1', 9090)
