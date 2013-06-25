@@ -39,7 +39,153 @@ app.use('/shared-resources/', express.static(__dirname + '/components/tools-basi
 app.use('/tools-tests', express.static(__dirname + '/components/tools-basis/tools-tests'))
 
 app.get('/', function(req, res) {
-    res.render('index', {});
+
+    var tools = [
+        {
+            title: 'Geoboard',
+            image: 'preview_geoboard-tool.png',
+            link: '/tools/geoboard/',
+            tags: [
+                'square',
+                'rectangle',
+                'triangle',
+                'equal sides'
+            ]
+        },
+        {
+            title: 'Distribution',
+            image: 'preview_distribution-tool.png',
+            link: '',
+            tags: [
+                'sharing',
+                'division'
+            ]
+        },
+        {
+            title: 'Splash Programming',
+            image: 'preview_splash-tool.png',
+            link: '',
+            tags: [
+                'coding',
+                'logic',
+                'angle'
+            ]
+        },
+        {
+            title: 'Clock',
+            image: 'preview_clock-tool.png',
+            link: '',
+            tags: [
+                'time',
+                'digital clock',
+                'analog clock'
+            ]
+        },
+        {
+            title: 'Sorting',
+            image: 'preview_sorting-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Counting Timer',
+            image: 'preview_counting-timer-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Pie Splitter',
+            image: 'preview_pie-splitter-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Place Value',
+            image: 'preview_place-value-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Times Table',
+            image: 'preview_times-table-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Number Bonds',
+            image: 'preview_number-bonds-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Number Line',
+            image: 'preview_number-line-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Dot Grid',
+            image: 'preview_dot-grid-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
+            title: 'Long Division',
+            image: 'preview_long-division-tool.png',
+            link: '',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        }
+    ];
+
+    res.render('index', {
+        tools: tools
+    });
+
 });
 
 app.get('/tools/geoboard/', function(req, res) {
