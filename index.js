@@ -37,6 +37,7 @@ app.use('/web-client/host', express.static(__dirname + '/components/tools-basis/
 app.use('/host-helpers/', express.static(__dirname + '/components/tools-basis/host-helpers'))
 app.use('/shared-resources/', express.static(__dirname + '/components/tools-basis/shared-resources'))
 app.use('/tools-tests', express.static(__dirname + '/components/tools-basis/tools-tests'))
+app.use('/tools', express.static(__dirname + '/components/tools-basis/tools'))
 
 app.get('/', function(req, res) {
 
@@ -183,7 +184,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/tools/geoboard/', function(req, res) {
-    res.render('geoboard', {});
+    res.render('tool', {});
+});
+
+app.get('/tools/clock/', function(req, res) {
+    res.render('tool', {});
 });
 
 var ports = seaport.connect('127.0.0.1', 9090)
