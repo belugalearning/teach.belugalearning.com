@@ -11,7 +11,7 @@
     {% for tool in tools %}
     <div class="tool span4">
         {% if tool.link %}
-            <a href="/tools/geoboard/" class="content">
+            <a href="{{ tool.link }}" class="content">
                 <img src="img/{{ tool.image }}">
                 <h3>{{ tool.title }}</h3>
             </a>

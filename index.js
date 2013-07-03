@@ -54,6 +54,16 @@ app.get('/', function(req, res) {
             ]
         },
         {
+            title: 'Clock',
+            image: 'preview_clock-tool.png',
+            link: '/tools/clock/',
+            tags: [
+                'time',
+                'digital clock',
+                'analog clock'
+            ]
+        },
+        {
             title: 'Distribution',
             image: 'preview_distribution-tool.png',
             link: '',
@@ -70,16 +80,6 @@ app.get('/', function(req, res) {
                 'coding',
                 'logic',
                 'angle'
-            ]
-        },
-        {
-            title: 'Clock',
-            image: 'preview_clock-tool.png',
-            link: '',
-            tags: [
-                'time',
-                'digital clock',
-                'analog clock'
             ]
         },
         {
