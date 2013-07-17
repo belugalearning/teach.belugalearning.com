@@ -1,5 +1,6 @@
 var util = require('util')
   , fs = require('fs')
+  , exec = require('child_process').exec
   , cons = require('consolidate')
   , swig = require('swig')
   , express = require('express')
@@ -7,8 +8,7 @@ var util = require('util')
 ;
 
 var localise = !!~process.argv.indexOf('--localise')
-
-var seaportServiceName = 'teach-dev'
+var seaportServiceName
 
 var app = express()
 app.use(express.cookieParser())
@@ -191,7 +191,15 @@ app.get('/tools/clock/', function(req, res) {
     res.render('tool', {});
 });
 
-var ports = seaport.connect('127.0.0.1', 9090)
-var port = localise ? 3333 : ports.register(seaportServiceName)
-app.listen(port)
-console.log('listening on http://127.0.0.1:%d', port)
+// here's hacky way of setting the seaport service name
+// find out what git branch we're on. set seaport service name to teach-[branch]
+exec('git branch -a | grep "*"', { cwd: __dirname }, function(e, text) {
+  var branch = text.match(/\* (\S+)/)[1]
+  seaportServiceName = util.format('teach-%s', branch)
+  console.log('seaportServiceName: %s', seaportServiceName)
+
+  var ports = seaport.connect('127.0.0.1', 9090)
+  var port = localise ? 3333 : ports.register(seaportServiceName)
+  app.listen(port)
+  console.log('listening on http://127.0.0.1:%d', port)
+})
