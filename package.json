@@ -10,9 +10,6 @@
     "consolidate": "~0.9.1",
     "seaport": "~1.5.0"
   },
-  "devDependencies": {
-    "seaport": "~1.5.0"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
