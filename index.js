@@ -65,6 +65,17 @@ app.get('/', function(req, res) {
             ]
         },
         {
+            title: 'Sorting',
+            image: 'preview_sorting-tool.png',
+            link: '/tools/sorting/',
+            tags: [
+                'sorting',
+                'bar charts',
+                'matching',
+                'venn diagram'
+            ]
+        },
+        {
             title: 'Distribution',
             image: 'preview_distribution-tool.png',
             link: '',
@@ -81,17 +92,6 @@ app.get('/', function(req, res) {
                 'coding',
                 'logic',
                 'angle'
-            ]
-        },
-        {
-            title: 'Sorting',
-            image: 'preview_sorting-tool.png',
-            link: '',
-            tags: [
-                'sorting',
-                'bar charts',
-                'matching',
-                'venn diagram'
             ]
         },
         {
