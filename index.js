@@ -32,6 +32,7 @@ app.set('views', __dirname + '/views');
 
 
 app.use(express.static(__dirname))
+app.use('./content-service', express.static(__dirname + '/content-service'))
 app.use('/web-client/', express.static(__dirname + '/tools-basis/web-client'))
 app.use('/web-client/host', express.static(__dirname + '/tools-basis/web-client/host'))
 app.use('/host-helpers/', express.static(__dirname + '/tools-basis/host-helpers'))
