@@ -6,8 +6,8 @@ set -x
 # update git
 git pull
 
-# update tools-basis via bower
-bower install git@github.com:belugalearning/tools-basis.git
+# update tools-basis via git
+git submodule update --init --recursive
 # compile less
 node_modules/less/bin/lessc less/screen.less css/screen.css
 

@@ -32,12 +32,12 @@ app.set('views', __dirname + '/views');
 
 
 app.use(express.static(__dirname))
-app.use('/web-client/', express.static(__dirname + '/components/tools-basis/web-client'))
-app.use('/web-client/host', express.static(__dirname + '/components/tools-basis/web-client/host'))
-app.use('/host-helpers/', express.static(__dirname + '/components/tools-basis/host-helpers'))
-app.use('/shared-resources/', express.static(__dirname + '/components/tools-basis/shared-resources'))
-app.use('/tools-tests', express.static(__dirname + '/components/tools-basis/tools-tests'))
-app.use('/tools', express.static(__dirname + '/components/tools-basis/tools'))
+app.use('/web-client/', express.static(__dirname + '/tools-basis/web-client'))
+app.use('/web-client/host', express.static(__dirname + '/tools-basis/web-client/host'))
+app.use('/host-helpers/', express.static(__dirname + '/tools-basis/host-helpers'))
+app.use('/shared-resources/', express.static(__dirname + '/tools-basis/shared-resources'))
+app.use('/tools-tests', express.static(__dirname + '/tools-basis/tools-tests'))
+app.use('/tools', express.static(__dirname + '/tools-basis/tools'))
 
 app.get('/', function(req, res) {
 
@@ -183,11 +183,7 @@ app.get('/', function(req, res) {
 
 });
 
-app.get('/tools/geoboard/', function(req, res) {
-    res.render('tool', {});
-});
-
-app.get('/tools/clock/', function(req, res) {
+app.get('/tools/*/', function(req, res) {
     res.render('tool', {});
 });
 
