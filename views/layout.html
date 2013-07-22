@@ -42,6 +42,18 @@
                 if (height > $('section[role=main]').height()) {
                     $('section[role=main], iframe').height(height);
                 }
+
+                var toolWindow = document.getElementById('tool').contentWindow;
+
+                $('#questionContent a').click(function (e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    toolWindow.bl.toolLayer.reset();
+                    toolWindow.bl.toolLayer.setQuestion(
+                        toolWindow.bl.contentService.question($this.data('content'))
+                    );
+                })
+
             });
         </script>
         <script>

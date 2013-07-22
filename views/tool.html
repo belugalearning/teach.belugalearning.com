@@ -2,5 +2,22 @@
 
 {% block bodyclass %}dark{% endblock %}
 {% block body %}
-<iframe src="/web-client/host" seamless></iframe>
+{% if toolName == 'sorting' %}
+<div class="row-fluid">
+    <section role="main" class="span10 offset2">
+		<iframe src="/web-client/host" id="tool" seamless></iframe>
+    </section>
+    <section role="sidebar" class="span2">
+		<nav id="questionContent">
+			<ul>
+				<li><a href="#" data-content='{ "tool":"sorting", "toolMode":"boxes", "setCategory":"creature", "numSets": 3}'>Unit Boxes</a></li>
+				<li><a href="#" data-content='{ "tool":"sorting", "toolMode":"venn", "setCategory":"creature", "numSets": 3}'>Venn Diagram</a></li>
+				<li><a href="#" data-content='{ "tool":"sorting", "toolMode":"table", "setCategory":"creature", "numSets": 3}'>Table Sorting</a></li>
+			</ul>
+		</nav>
+    </section>
+</div>
+{% else %}
+<iframe src="/web-client/host" id="tool" seamless></iframe>
+{% endif %}
 {% endblock %}

@@ -184,8 +184,10 @@ app.get('/', function(req, res) {
 
 });
 
-app.get('/tools/*/', function(req, res) {
-    res.render('tool', {});
+app.get('/tools/:toolName/', function(req, res) {
+    res.render('tool', {
+        toolName: req.params.toolName
+    });
 });
 
 // here's hacky way of setting the seaport service name
