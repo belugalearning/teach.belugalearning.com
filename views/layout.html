@@ -52,6 +52,8 @@
                     toolWindow.bl.toolLayer.setQuestion(
                         toolWindow.bl.contentService.question($this.data('content'))
                     );
+                    $('#questionContent a').removeClass('selected');
+                    $this.addClass('selected');
                 })
 
             });
