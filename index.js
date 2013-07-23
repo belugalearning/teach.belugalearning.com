@@ -77,6 +77,15 @@ app.get('/', function(req, res) {
             ]
         },
         {
+            title: 'Long Division',
+            image: 'preview_long-division-tool.png',
+            link: '/tools/division/',
+            tags: [
+                'division',
+                'sharing'
+            ]
+        },
+        {
             title: 'Distribution',
             image: 'preview_distribution-tool.png',
             link: '',
@@ -166,15 +175,6 @@ app.get('/', function(req, res) {
                 'multiplication',
                 'square',
                 'rectangle'
-            ]
-        },
-        {
-            title: 'Long Division',
-            image: 'preview_long-division-tool.png',
-            link: '',
-            tags: [
-                'division',
-                'sharing'
             ]
         }
     ];
