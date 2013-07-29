@@ -5,6 +5,8 @@ var util = require('util')
   , swig = require('swig')
   , express = require('express')
   , seaport = require('seaport')
+  , connect = require('connect')
+  , _ = require('underscore')
 ;
 
 var localise = !!~process.argv.indexOf('--localise')
@@ -30,16 +32,6 @@ swig.init({
 });
 app.set('views', __dirname + '/views');
 
-
-app.use(express.static(__dirname))
-app.use('/expression-service', express.static(__dirname + '/tools-basis/expression-service'))
-app.use('./content-service', express.static(__dirname + '/content-service'))
-app.use('/web-client/', express.static(__dirname + '/tools-basis/web-client'))
-app.use('/web-client/host', express.static(__dirname + '/tools-basis/web-client/host'))
-app.use('/host-helpers/', express.static(__dirname + '/tools-basis/host-helpers'))
-app.use('/shared-resources/', express.static(__dirname + '/tools-basis/shared-resources'))
-app.use('/tools-tests', express.static(__dirname + '/tools-basis/tools-tests'))
-app.use('/tools', express.static(__dirname + '/tools-basis/tools'))
 
 app.get('/', function(req, res) {
 
@@ -190,6 +182,52 @@ app.get('/tools/:toolName/', function(req, res) {
         toolName: req.params.toolName
     });
 });
+
+var cache = {};
+app.get('/web-client/host/src/resource.js', function(req, res) {
+    var file = './tools-basis/web-client/host/src/resource.json';
+
+    var cacheKey = req.query.prefixes.join('');
+    var finalResources = cache[cacheKey] || {};
+
+    if (Object.keys(finalResources).length === 0) {
+        
+        fs.readFile(file, 'utf8', function (err, data) {
+            if (err) {
+                console.log('Error: ' + err);
+                return;
+            }
+         
+            data = JSON.parse(data);
+
+            _.each(req.query.prefixes, function (prefix) {
+                _.each(data, function (v, k) {
+                    if (k.match(prefix)) {
+                        finalResources[k] = v;
+                    }
+                });
+            });
+
+            cache[cacheKey].res = finalResources;
+         
+            res.send('window.bl = window.bl || {};\nwindow.bl._tool_resources = ' + JSON.stringify(finalResources))
+        });
+    } else {
+        res.send('window.bl = window.bl || {};\nwindow.bl._tool_resources = ' + JSON.stringify(finalResources))
+    }
+});
+
+
+app.use(express.static(__dirname))
+app.use(connect.compress())
+app.use('/expression-service', express.static(__dirname + '/tools-basis/expression-service'))
+app.use('./content-service', express.static(__dirname + '/content-service'))
+app.use('/web-client/', express.static(__dirname + '/tools-basis/web-client'))
+app.use('/web-client/host', express.static(__dirname + '/tools-basis/web-client/host'))
+app.use('/host-helpers/', express.static(__dirname + '/tools-basis/host-helpers'))
+app.use('/shared-resources/', express.static(__dirname + '/tools-basis/shared-resources'))
+app.use('/tools-tests', express.static(__dirname + '/tools-basis/tools-tests'))
+app.use('/tools', express.static(__dirname + '/tools-basis/tools'))
 
 // here's hacky way of setting the seaport service name
 // find out what git branch we're on. set seaport service name to teach-[branch]
