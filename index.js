@@ -208,7 +208,7 @@ app.get('/web-client/host/src/resource.js', function(req, res) {
                 });
             });
 
-            cache[cacheKey].res = finalResources;
+            cache[cacheKey] = finalResources;
          
             res.send('window.bl = window.bl || {};\nwindow.bl._tool_resources = ' + JSON.stringify(finalResources))
         });
