@@ -1,6 +1,6 @@
 # Prerequisites
 
-## Homebrew
+### Homebrew
 [Homebrew](http://brew.sh/) is a package manager for OSX. It makes installing command line utilities really easy!
 
 Open terminal.app and run: `ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"`
@@ -8,21 +8,21 @@ Open terminal.app and run: `ruby -e "$(curl -fsSL https://raw.github.com/mxcl/ho
 Say yes when it prompts you.
 
 
-## git
+### git
 
 [git](http://git-scm.com/) is the source code versioning tool that we use. You can use it though the command line or with something like [SourceTree](http://www.sourcetreeapp.com/) too.
 
 Run: `brew install git`
 
 
-## GitHub
+### GitHub
 
 If you don't have a [GitHub.com](http://github.com) account please create one. Email [Nick](mailto:nc@belugalearning.com) to be added to the Organisation account.
 
 You'll probably also want to generate a ssh key & add it to your GitHub account, this guide will help you: [Generating SSH Keys](https://help.github.com/articles/generating-ssh-keys)
 
 
-## node.js
+### node.js
 
 [node](http://nodejs.org/) is a server application platform that we use for lots of things.
 
