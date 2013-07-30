@@ -8,6 +8,13 @@ git pull
 
 # update tools-basis via git
 git submodule update --init --recursive
+
+# update npm
+npm install
+
+# update bower
+bower install
+
 # compile less
 lessc less/screen.less css/screen.css
 
