@@ -185,7 +185,7 @@ app.get('/tools/:toolName/', function(req, res) {
 
 var cache = {};
 app.get('/web-client/host/src/resource.js', function(req, res) {
-    var file = './tools-basis/web-client/host/src/resource.json';
+    var file = __dirname + '/tools-basis/web-client/host/src/resource.json';
 
     var cacheKey = req.query.prefixes.join('');
     var finalResources = cache[cacheKey] || {};
