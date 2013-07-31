@@ -78,6 +78,15 @@ app.get('/', function(req, res) {
             ]
         },
         {
+            title: 'Pie Splitter',
+            image: 'preview_pie-splitter-tool.png',
+            link: '/tools/piesplitter/',
+            tags: [
+                'fractions',
+                'splitting'
+            ]
+        },
+        {
             title: 'Distribution',
             image: 'preview_distribution-tool.png',
             link: '',
@@ -104,15 +113,6 @@ app.get('/', function(req, res) {
                 'counting up',
                 'counting down',
                 'counting on'
-            ]
-        },
-        {
-            title: 'Pie Splitter',
-            image: 'preview_pie-splitter-tool.png',
-            link: '',
-            tags: [
-                'fractions',
-                'splitting'
             ]
         },
         {
