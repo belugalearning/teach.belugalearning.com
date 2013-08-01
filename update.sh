@@ -16,6 +16,6 @@ npm install
 ./node_modules/bower install
 
 # compile less
-lessc less/screen.less css/screen.css
+./node_modules/lessc less/screen.less css/screen.css
 
 forever restart `pwd`
