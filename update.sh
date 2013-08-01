@@ -13,9 +13,9 @@ git submodule update --init --recursive
 npm install
 
 # update bower
-./node_modules/bower install
+./node_modules/bower/bin/bower install
 
 # compile less
-./node_modules/lessc less/screen.less css/screen.css
+./node_modules/less/bin/lessc less/screen.less css/screen.css
 
 forever restart `pwd`
