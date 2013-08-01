@@ -13,7 +13,7 @@ git submodule update --init --recursive
 npm install
 
 # update bower
-bower install
+./node_modules/bower install
 
 # compile less
 lessc less/screen.less css/screen.css
