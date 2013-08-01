@@ -69,7 +69,7 @@ app.get('/', function(req, res) {
             ]
         },
         {
-            title: 'Long Division',
+            title: 'Division',
             image: 'preview_long-division-tool.png',
             link: '/tools/division/',
             tags: [
