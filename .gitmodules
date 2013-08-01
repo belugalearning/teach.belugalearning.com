@@ -1,0 +1,6 @@
+[submodule "tools-basis"]
+	path = tools-basis
+	url = git@github.com:belugalearning/tools-basis.git
+[submodule "content-service"]
+	path = content-service
+	url = git@github.com:belugalearning/content-service.git
