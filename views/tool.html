@@ -19,6 +19,13 @@
         $this.addClass('selected');
       });
 
+      $('a#fullscreen').click(function (e) {
+        e.preventDefault();
+
+        $tool.get(0).webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
+        $tool.get(0).mozRequestFullScreen(); //Firefox
+      });
+
     }
     $tool.load(function (){
 
@@ -81,31 +88,11 @@
           );
       })
     });
-
-    $('a#fullscreen').click(function (e) {
-      e.preventDefault();
-
-      $("#tool")[0].webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
-      $("#tool")[0].mozRequestFullScreen(); //Firefox
-    })
-
   });
 </script>
 {% endblock %}
 {% block content %}
-<h1>{{toolName}}</h1>
-{% if toolName == 'sorting' %}
-<!-- <nav id="questionContent">
-  <ul>
-    <li><a class="selected" href="#" data-content='{ "tool":"sorting", "toolMode":"venn", "setCategory":"creature", "numSets": 3}'>Venn Diagram</a></li>
-    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"bar", "setCategory":"creature", "numSets": 5}'>Bar Chart</a></li>
-    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"boxes", "setCategory":"creature", "numSets": 3}'>Unit Boxes</a></li>
-    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"table", "setCategory":"creature", "numSets": 2}'>Table Sorting - Creatures</a></li>
-    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"table", "setCategory":"shape", "numSets": 2}'>Table Sorting - Shapes</a></li>
-  </ul>
-</nav> -->
-{% endif %}
-
+<h1>{{ toolName|title }}</h1>
 <a href="" id="fullscreen">Fullscreen</a>
 <div id="tool_frame">
   <div id="tool_settings">
