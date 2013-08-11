@@ -1,25 +1,105 @@
 {% extends 'layout.html' %}
 
-{% block bodyclass %}dark{% endblock %}
-{% block body %}
+{% block pageclass %}page{% endblock %}
+{% block js %}
+<script type="text/javascript">
+  $(function () {
+    var $tool = $('#tool');
+    if ($tool.length > 0) {
+      var toolWindow = $tool.get(0).contentWindow;
+
+      $('#questionContent a').click(function (e) {
+        e.preventDefault();
+        var $this = $(this);
+        toolWindow.bl.toolLayer.reset();
+        toolWindow.bl.toolLayer.setQuestion(
+          toolWindow.bl.contentService.question($this.data('content'))
+        );
+        $('#questionContent a').removeClass('selected');
+        $this.addClass('selected');
+      });
+
+    }
+    $tool.load(function (){
+
+      var menuOptions = window.bl.contentService.getMenuOptions({ tool: 'sorting' });
+
+      var menuHtml = (function buildMenu(items) {
+        var $subhtml = $('<ul />');
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          var $li = $('<li />');
+          if (item.children.length > 0) {
+              var $a = $('<a>').attr({
+                      'href': ''
+                  }).data({
+                      'key': item.key,
+                      'changed': item.setSelected,
+                  }).text(item.name);
+
+                  $li.append($a)
+                      .append(
+                          buildMenu(item.children)
+                      );
+          } else {
+              $li.append(item.name);
+              var $check = $('<input type="checkbox" class="option" name="" checked />').data({
+                      'key': item.key,
+                      'changed': item.setSelected,
+                  })
+              $li.append($check);
+          }
+          $subhtml.append($li);
+        }
+        return $subhtml;
+      })(menuOptions);
+
+      $('#tool_settings .menu').append(menuHtml);
+
+      $('#tool_settings a').on('click', function (e) {
+          e.preventDefault();
+          var $this = $(this);
+          $this.parent().parent().find('> li').removeClass('selected');
+          $this.parent().addClass('selected');
+      });
+
+      $('input').on('change', function () {
+      
+          var setChanged = $(this).data('changed');
+          setChanged($(this).is(':checked'));
+
+          top.bl.toolLayer.reset();
+          // call set question
+          top.bl.toolLayer.setQuestion(
+            top.bl.contentService.question(
+              { "tool":"sorting", "toolMode":"table", "setCategory":"shape", "numSets": 2}
+            )
+          );
+      })
+    });
+
+  });
+</script>
+{% endblock %}
+{% block content %}
+<h1>{{toolName}}</h1>
 {% if toolName == 'sorting' %}
-<div class="row-fluid">
-    <section role="main" class="span10 offset2">
-		<iframe src="/web-client/host" id="tool" seamless></iframe>
-    </section>
-    <section role="sidebar" class="span2">
-		<nav id="questionContent">
-			<ul>
-				<li><a class="selected" href="#" data-content='{ "tool":"sorting", "toolMode":"venn", "setCategory":"creature", "numSets": 3}'>Venn Diagram</a></li>
-				<li><a href="#" data-content='{ "tool":"sorting", "toolMode":"bar", "setCategory":"creature", "numSets": 5}'>Bar Chart</a></li>
-				<!-- <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"boxes", "setCategory":"creature", "numSets": 3}'>Unit Boxes</a></li> -->
-				<li><a href="#" data-content='{ "tool":"sorting", "toolMode":"table", "setCategory":"creature", "numSets": 2}'>Table Sorting - Creatures</a></li>
-				<li><a href="#" data-content='{ "tool":"sorting", "toolMode":"table", "setCategory":"shape", "numSets": 2}'>Table Sorting - Shapes</a></li>
-			</ul>
-		</nav>
-    </section>
-</div>
-{% else %}
-<iframe src="/web-client/host" id="tool" seamless></iframe>
+<!-- <nav id="questionContent">
+  <ul>
+    <li><a class="selected" href="#" data-content='{ "tool":"sorting", "toolMode":"venn", "setCategory":"creature", "numSets": 3}'>Venn Diagram</a></li>
+    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"bar", "setCategory":"creature", "numSets": 5}'>Bar Chart</a></li>
+    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"boxes", "setCategory":"creature", "numSets": 3}'>Unit Boxes</a></li>
+    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"table", "setCategory":"creature", "numSets": 2}'>Table Sorting - Creatures</a></li>
+    <li><a href="#" data-content='{ "tool":"sorting", "toolMode":"table", "setCategory":"shape", "numSets": 2}'>Table Sorting - Shapes</a></li>
+  </ul>
+</nav> -->
 {% endif %}
+
+<div id="tool_frame">
+  <div id="tool_settings">
+      <a href="">Content Configuration</a>
+      <div class="menu"></div>
+  </div>
+  <iframe src="/web-client/host" id="tool" seamless></iframe>
+</div>
 {% endblock %}
