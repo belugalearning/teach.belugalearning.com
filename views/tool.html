@@ -82,6 +82,13 @@
       })
     });
 
+    $('a#fullscreen').click(function (e) {
+      e.preventDefault();
+
+      $("#tool")[0].webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
+      $("#tool")[0].mozRequestFullScreen(); //Firefox
+    })
+
   });
 </script>
 {% endblock %}
@@ -99,6 +106,7 @@
 </nav> -->
 {% endif %}
 
+<a href="" id="fullscreen">Fullscreen</a>
 <div id="tool_frame">
   <div id="tool_settings">
       <a href="">Content Configuration</a>
