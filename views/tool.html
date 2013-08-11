@@ -59,8 +59,14 @@
       $('#tool_settings a').on('click', function (e) {
           e.preventDefault();
           var $this = $(this);
+          var setChanged = $(this).data('changed');
+          setChanged(true);
           $this.parent().parent().find('> li').removeClass('selected');
           $this.parent().addClass('selected');
+          top.bl.toolLayer.reset();
+          top.bl.toolLayer.setQuestion(
+            top.bl.contentService.question()
+          );
       });
 
       $('input').on('change', function () {
@@ -71,9 +77,7 @@
           top.bl.toolLayer.reset();
           // call set question
           top.bl.toolLayer.setQuestion(
-            top.bl.contentService.question(
-              { "tool":"sorting", "toolMode":"table", "setCategory":"shape", "numSets": 2}
-            )
+            top.bl.contentService.question()
           );
       })
     });
