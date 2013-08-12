@@ -113,7 +113,6 @@ ul.tags {
 }
 #tool_settings div.menu {
     background: #E39436;
-    display: none;
     min-height: @menu-height;
     overflow-y: scroll;
     margin: 40px 0 0 100px;
@@ -129,7 +128,6 @@ ul.tags {
     padding: 5px 0;
     list-style: none;
     width: @menu-width;
-    height: @menu-height;
     border-right: 2px solid #F7EDDC;
 }
 #tool_settings li a {
@@ -142,7 +140,15 @@ ul.tags {
     width: auto;
     background: #E39436 url(/img/arrow_down.png) right center no-repeat;
     border-radius: 3px 3px 0 0;
-    padding: 10px 30px;
+    padding: 10px 30px 10px 10px;
+    i.gear {
+	    background: url(/img/gear.png) center center no-repeat;
+	    width: 18px;
+	    height: 18px;
+	    display: inline-block;
+	    margin-right: 10px;
+	    margin-bottom: -4px
+    }
 }
 #tool_settings li {
     display: block;
@@ -162,10 +168,15 @@ ul.tags {
     position: absolute;
     top: 0;
     left: @menu-width;
-    display: none;
 }
-#tool_settings li.selected > ul {
-    display: block;
+#tool_settings .built {
+	display: none;
+	li > ul {
+		display: none;
+	}
+	li.selected > ul {
+	    display: block;
+	}
 }
 #tool_settings li:hover,
 #tool_settings li.selected {

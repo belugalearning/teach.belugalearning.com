@@ -61,7 +61,16 @@
         return $subhtml;
       })(menuOptions);
 
-      $('#tool_settings .menu').append(menuHtml);
+      $('#tool_settings .menu')
+        .append(menuHtml)
+        .height(function () {
+          var h = 0;
+          $(this).find('ul').each(function () {
+            h = Math.max($(this).height() + 10, h);
+          }).height(h);
+          return h;
+        })
+        .addClass('built');
 
       $('#tool_settings a').on('click', function (e) {
           e.preventDefault();
@@ -96,7 +105,7 @@
 <a href="" id="fullscreen">Fullscreen</a>
 <div id="tool_frame">
   <div id="tool_settings">
-      <a href="">Content Configuration</a>
+      <a href=""><i class="icon gear"></i>Question Setup</a>
       <div class="menu"></div>
   </div>
   <iframe src="/web-client/host" id="tool" seamless></iframe>
