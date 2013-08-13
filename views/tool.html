@@ -3,6 +3,7 @@
 {% block pageclass %}page{% endblock %}
 {% block js %}
 <script type="text/javascript">
+
   $(function () {
     var $tool = $('#tool');
     $tool.load(function (){
@@ -79,7 +80,7 @@
         }
       }
 
-      $('#tool_settings a').on('click', function (e) {
+      $('#tool_settings .menu a').on('click', function (e) {
           e.preventDefault();
           var $this = $(this);
           var setChanged = $this.data('changed');
@@ -87,7 +88,11 @@
           $this.parent().addClass('selected');
           setChanged(true);
           setQuestion();
-      });
+      })
+
+      window.toolLoaded = function () {
+        $('#tool_settings .menu a:first').click();
+      };
 
       $('input').on('change', function () {
           var setChanged = $(this).data('changed');
