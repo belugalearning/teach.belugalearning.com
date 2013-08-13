@@ -9,17 +9,6 @@
 
       var toolWindow = $tool.get(0).contentWindow;
 
-      $('#questionContent a').click(function (e) {
-        e.preventDefault();
-        var $this = $(this);
-        toolWindow.bl.toolLayer.reset();
-        toolWindow.bl.toolLayer.setQuestion(
-          toolWindow.bl.contentService.question($this.data('content'))
-        );
-        $('#questionContent a').removeClass('selected');
-        $this.addClass('selected');
-      });
-
       $('a#fullscreen').click(function (e) {
         e.preventDefault();
 
@@ -36,8 +25,10 @@
           var $li = $('<li />');
           if (item.children.length > 0) {
               var $a = $('<a>').attr({
-                      'href': ''
+                      'href': '',
+                      'class': item.type + '_' + item.key
                   }).data({
+                      'type': item.type,
                       'key': item.key,
                       'changed': item.setSelected,
                   }).text(item.name);
@@ -71,10 +62,21 @@
         .addClass('built');
 
       var setQuestion = function () {
-          top.bl.toolLayer.reset();
-          top.bl.toolLayer.setQuestion(
-            top.bl.contentService.question()
-          );
+        top.bl.toolLayer.reset();
+        top.bl.toolLayer.setQuestion(
+          top.bl.contentService.question()
+        );
+        var $scope = $('#tool_settings .menu');
+        var currentOptions = window.bl.contentService.getCurrentOptions()
+        for (var key in currentOptions) {
+          if (currentOptions.hasOwnProperty(key)) {
+            var $s = $scope
+              .find('a.' + key + '_' + currentOptions[key])
+                .parent('li')
+                  .addClass('selected');
+            $scope = $s.length > 0 ? $s : $scope;
+          }
+        }
       }
 
       $('#tool_settings a').on('click', function (e) {
