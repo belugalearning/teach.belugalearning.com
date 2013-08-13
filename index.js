@@ -28,6 +28,7 @@ app.set('view engine', 'html');
 // This helps it know where to look for includes and parent templates
 swig.init({
     root: __dirname + '/views',
+    cache: !localise,
     allowErrors: true // allows errors to be thrown and caught by express instead of suppressed by Swig
 });
 app.set('views', __dirname + '/views');
