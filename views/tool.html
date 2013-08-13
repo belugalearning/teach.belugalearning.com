@@ -5,7 +5,8 @@
 <script type="text/javascript">
   $(function () {
     var $tool = $('#tool');
-    if ($tool.length > 0) {
+    $tool.load(function (){
+
       var toolWindow = $tool.get(0).contentWindow;
 
       $('#questionContent a').click(function (e) {
@@ -25,9 +26,6 @@
         $tool.get(0).webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
         $tool.get(0).mozRequestFullScreen(); //Firefox
       });
-
-    }
-    $tool.load(function (){
 
       var menuOptions = window.bl.contentService.getMenuOptions({ tool: 'sorting' });
 
@@ -72,29 +70,27 @@
         })
         .addClass('built');
 
+      var setQuestion = function () {
+          top.bl.toolLayer.reset();
+          top.bl.toolLayer.setQuestion(
+            top.bl.contentService.question()
+          );
+      }
+
       $('#tool_settings a').on('click', function (e) {
           e.preventDefault();
           var $this = $(this);
-          var setChanged = $(this).data('changed');
-          setChanged(true);
+          var setChanged = $this.data('changed');
           $this.parent().parent().find('> li').removeClass('selected');
           $this.parent().addClass('selected');
-          top.bl.toolLayer.reset();
-          top.bl.toolLayer.setQuestion(
-            top.bl.contentService.question()
-          );
+          setChanged(true);
+          setQuestion();
       });
 
       $('input').on('change', function () {
-      
           var setChanged = $(this).data('changed');
           setChanged($(this).is(':checked'));
-
-          top.bl.toolLayer.reset();
-          // call set question
-          top.bl.toolLayer.setQuestion(
-            top.bl.contentService.question()
-          );
+          setQuestion();
       })
     });
   });
