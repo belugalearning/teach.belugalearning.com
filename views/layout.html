@@ -13,6 +13,7 @@
   </head>
 
   <body class="teach {% block bodyclass %}{% endblock %}">
+    {% block root %}
     <div class="beluga-shared-header navbar navbar-fixed-top">
 
       <div class="beluga-nav property navbar-inner">
@@ -112,6 +113,7 @@
       </p>
     </div>
     </footer>
+    {% endblock %}
     <script src="//localhost:4444/js/jquery.js"></script>
     <script src="//localhost:4444/js/bootstrap-dropdown.js"></script>
     {% block js %}{% endblock %}

@@ -6,7 +6,7 @@
 
   $(function () {
     var $tool = $('#tool');
-    $tool.load(function (){
+    $tool.load(function () {
 
       var toolWindow = $tool.get(0).contentWindow;
 
@@ -103,10 +103,9 @@
   });
 </script>
 {% endblock %}
-{% block content %}
-<h1>{{ toolName|title }}</h1>
-<a href="" id="fullscreen">Fullscreen</a>
+{% block root %}
 <div id="tool_frame">
+  <a href="" id="fullscreen">Fullscreen</a>
   <div id="tool_settings">
       <a href=""><i class="icon gear"></i>Question Setup</a>
       <div class="menu"></div>

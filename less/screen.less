@@ -31,12 +31,6 @@ body {
 }
 
 
-iframe {
-	border: none;
-	width: 100%;
-	min-height: 675px;
-}
-
 .tool {
 	position: relative;
 	display: inline-block;
@@ -95,8 +89,35 @@ ul.tags {
 @menu-width: 180px;
 
 #tool_frame {
-	position: relative;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100%;
 	padding-top: 40px;
+	background: #DD831F;
+    font-family: MikadoBold;
+    a {
+    	color: #3C3C3C;
+		&:hover {
+			color: #fff;
+		}
+    }
+
+	#fullscreen {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		padding: 10px 15px;
+		background-color: #E39436;
+
+	}
+
+	iframe {
+		border: none;
+		width: 100%;
+		min-height: 100%;
+	}
 }
 
 #tool_settings {
@@ -104,7 +125,6 @@ ul.tags {
     top: 0px;
     left: 0px;
     right: 0px;
-    font-family: MikadoBold;
 }
 #tool_settings:hover,
 #tool_settings div.menu:hover,
@@ -119,9 +139,6 @@ ul.tags {
     position: relative;
     border-radius: 5px 0px 5px 5px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.5);
-}
-#tool_settings a {
-	color: #3C3C3C;
 }
 #tool_settings ul {
     margin: 0;

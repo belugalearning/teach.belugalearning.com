@@ -6,7 +6,7 @@
 {% for tool in tools %}
 <div class="tool{% if loop.index % 3 == 0 %} end{% endif %}">
     {% if tool.link %}
-        <a href="{{ tool.link }}" class="details">
+        <a href="{{ tool.link }}" class="details" target="_new">
             <img src="img/{{ tool.image }}">
             <h3>{{ tool.title }}</h3>
         </a>
