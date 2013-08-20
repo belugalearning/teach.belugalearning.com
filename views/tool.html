@@ -19,30 +19,32 @@
 
       var menuOptions = window.bl.contentService.getMenuOptions({ tool: 'sorting' });
 
-      var menuHtml = (function buildMenu(items) {
+      var menuHtml = (function buildMenu(item) {
         var $subhtml = $('<ul />');
-        for (var i = 0; i < items.length; i++) {
-          var item = items[i];
+        $subhtml.append($('<h3 />').text(item.title));
+        for (var i = 0; i < item.options.length; i++) {
+          var sub_item = item.options[i];
           var $li = $('<li />');
-          if (item.children.length > 0) {
+          if (sub_item.hasOwnProperty('options') && sub_item.options.length > 0) { // if we need to recurse
               var $a = $('<a>').attr({
                       'href': '',
-                      'class': item.type + '_' + item.key
+                      'class': sub_item.key
                   }).data({
-                      'type': item.type,
-                      'key': item.key,
-                      'changed': item.setSelected,
-                  }).text(item.name);
+                      'key': sub_item.key
+                  }).text(sub_item.title);
 
-                  $li.append($a)
-                      .append(
-                          buildMenu(item.children)
-                      );
-          } else {
-              $li.append(item.name);
+                  $li.append($a);
+                  if (sub_item.allowAny) {
+                    $li.append($('<a />').addClass('any').text('Any'));
+                  }
+                  $li
+                    .append(
+                        buildMenu(sub_item)
+                    );
+          } else { // we need to display a value
+              $li.append(sub_item.title);
               var $check = $('<input type="checkbox" class="option" name="" checked />').data({
-                      'key': item.key,
-                      'changed': item.setSelected,
+                      'key': sub_item.key,
                   })
               $li.append($check);
           }
