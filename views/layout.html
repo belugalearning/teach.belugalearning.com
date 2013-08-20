@@ -54,8 +54,11 @@
                     );
                     $('#questionContent a').removeClass('selected');
                     $this.addClass('selected');
-                })
+                });
 
+                window.toolLoaded = function () {
+                    $('#questionContent a:first').click();
+                };
             });
         </script>
         <script>
