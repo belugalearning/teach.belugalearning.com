@@ -22,6 +22,43 @@
       var menuHtml = (function buildMenu(item) {
         var $subhtml = $('<ul />');
         $subhtml.append($('<h4 />').text(item.title));
+
+        var types = [];
+        var min = Infinity;
+        var max = Infinity * -1;
+        var gaps = [];
+
+        function allTheSame (arr) {
+          var ret = true;
+          for(var i = 1; i < arr.length; i++) {
+            if(arr[i] !== arr[0]) {
+                ret = false;
+            }
+          }
+          return ret;
+        }
+
+        // is this a set of values?
+        if (item.options[0].hasOwnProperty('value')) {
+
+          // let's determine the type of the values.
+          for (var i = 0; i < item.options.length; i++) {
+            var sub_item = item.options[i];
+            var type = typeof sub_item.value;
+            types.push(type);
+
+            if (type === typeof 1) {
+              min = Math.min(min, sub_item.value);
+              max = Math.max(max, sub_item.value);
+              if (i > 0) {
+                var prev_sub_item = item.options[i-1];
+                gaps.push(sub_item.value - prev_sub_item.value);
+              }
+            }
+          }
+
+        }
+
         for (var i = 0; i < item.options.length; i++) {
           var sub_item = item.options[i];
           var $li = $('<li />');
@@ -42,11 +79,45 @@
                         buildMenu(sub_item)
                     );
           } else { // we need to display a value
-              $li.append(sub_item.title);
-              var $check = $('<input type="checkbox" class="option" name="" checked />').data({
-                      'key': sub_item.key,
-                  })
-              $li.append($check);
+
+              if (allTheSame(types)) {
+                // are they integers
+                if (types[0] === typeof 1) {
+
+                  $li.append(sub_item.title);
+                  var $check = $('<input type="checkbox" class="option" name="" checked />').data({
+                          'key': sub_item.key,
+                      })
+                  $li.append($check);
+                  
+                } else if (types[0] === typeof true) {
+                  // are they booleans
+                  if (i < 1) { // onlu show one
+                    $li.append('Enabled');
+                    var $check = $('<input type="checkbox" class="option" name="" checked />').data({
+                            'key': sub_item.key,
+                        })
+                    $li.append($check);
+                  }
+                } else {
+                  // are they strings?
+
+                  $li.append(sub_item.title);
+                  var $check = $('<input type="checkbox" class="option" name="" checked />').data({
+                          'key': sub_item.key,
+                      })
+                  $li.append($check);
+                  
+                }
+              } else {       
+
+                $li.append(sub_item.title);         
+                var $check = $('<input type="checkbox" class="option" name="" checked />').data({
+                        'key': sub_item.key,
+                    })
+                $li.append($check);
+              }
+
           }
           $subhtml.append($li);
         }
