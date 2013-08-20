@@ -21,7 +21,7 @@
 
       var menuHtml = (function buildMenu(item) {
         var $subhtml = $('<ul />');
-        $subhtml.append($('<h3 />').text(item.title));
+        $subhtml.append($('<h4 />').text(item.title));
         for (var i = 0; i < item.options.length; i++) {
           var sub_item = item.options[i];
           var $li = $('<li />');
@@ -33,7 +33,7 @@
                       'key': sub_item.key
                   }).text(sub_item.title);
 
-                  $li.append($a);
+                  $li.addClass('link').append($a);
                   if (sub_item.allowAny) {
                     $li.append($('<a />').addClass('any on').text('Any'));
                   }
@@ -82,7 +82,11 @@
         }
       }
 
-      $('#tool_settings .menu li').on('click', function (e) {
+      $('#tool_settings .menu a.any').on('click', function (e) {
+        $(this).toggleClass('on');
+      });
+
+      $('#tool_settings .menu li.link').on('click', function (e) {
           e.preventDefault();
           var $this = $(this).find('a:first');
           var setChanged = $this.data('changed');
