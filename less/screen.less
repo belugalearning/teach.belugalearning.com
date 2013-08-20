@@ -148,7 +148,17 @@ ul.tags {
     border-right: 2px solid #F7EDDC;
 }
 #tool_settings li a {
-    width: 100%;
+	display: inline-block;
+    &.any {
+    	background: #FF3400;
+    	border-radius: 3px;
+    	color: #fff;
+    	padding: 5px 10px;
+    	margin-left: 5px;
+    	&.on {
+    		background: #1C87D2;
+    	}
+    }
 }
 #tool_settings > a {
     right: 0px;
@@ -187,7 +197,7 @@ ul.tags {
     left: @menu-width;
 }
 #tool_settings .built {
-	display: none;
+	// display: none;
 	li > ul {
 		display: none;
 	}
@@ -205,8 +215,8 @@ ul.tags {
     color: #fff;
     text-decoration: none;
 }
-#tool_frame li:hover > a,
-#tool_settings li.selected > a {
+#tool_frame li:hover,
+#tool_settings li.selected {
 	background-color: #D07B1E;
 	background-image: url(/img/arrow.png);
 	background-repeat: no-repeat;

@@ -35,7 +35,7 @@
 
                   $li.append($a);
                   if (sub_item.allowAny) {
-                    $li.append($('<a />').addClass('any').text('Any'));
+                    $li.append($('<a />').addClass('any on').text('Any'));
                   }
                   $li
                     .append(
@@ -82,9 +82,9 @@
         }
       }
 
-      $('#tool_settings .menu a').on('click', function (e) {
+      $('#tool_settings .menu li').on('click', function (e) {
           e.preventDefault();
-          var $this = $(this);
+          var $this = $(this).find('a:first');
           var setChanged = $this.data('changed');
           $this.parent().parent().find('> li').removeClass('selected');
           $this.parent().addClass('selected');
