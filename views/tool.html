@@ -20,26 +20,69 @@
       var menuOptions = window.bl.contentService.getMenuOptions({ tool: 'sorting' });
 
       var menuHtml = (function buildMenu(item) {
-        var $subhtml = $('<ul />');
+        var $subhtml = $('<div />').addClass('child_menu');
         $subhtml.append($('<h4 />').text(item.title));
 
         var types = [];
         var min = Infinity;
         var max = Infinity * -1;
         var gaps = [];
+        var hasValues = item.options[0].hasOwnProperty('value');
 
         function allTheSame (arr) {
           var ret = true;
           for(var i = 1; i < arr.length; i++) {
             if(arr[i] !== arr[0]) {
                 ret = false;
+                break;
             }
           }
           return ret;
         }
 
+
+        function chooseControl(sub_item) {
+          if (allTheSame(types)) {
+            // are they integers
+            if (types[0] === typeof 1) {
+
+              $li.append(sub_item.title);
+              var $check = $('<input type="checkbox" class="option" name="" />').data({
+                      'key': sub_item.key,
+                  })
+              $li.append($check);
+              
+            } else if (types[0] === typeof true) {
+              // are they booleans
+              if (i < 1) { // onlu show one
+                $li.append('Enabled');
+                var $check = $('<input type="checkbox" class="option" name="" />').data({
+                        'key': sub_item.key,
+                    })
+                $li.append($check);
+              }
+            } else {
+              // are they strings?
+
+              $li.append(sub_item.title);
+              var $check = $('<input type="checkbox" class="option" name="" />').data({
+                      'key': sub_item.key,
+                  })
+              $li.append($check);
+              
+            }
+          } else {       
+
+            $li.append(sub_item.title);         
+            var $check = $('<input type="checkbox" class="option" name="" />').data({
+                    'key': sub_item.key,
+                })
+            $li.append($check);
+          }
+        }
+
         // is this a set of values?
-        if (item.options[0].hasOwnProperty('value')) {
+        if (hasValues) {
 
           // let's determine the type of the values.
           for (var i = 0; i < item.options.length; i++) {
@@ -59,10 +102,16 @@
 
         }
 
+        if (item.allowAny) {
+          $subhtml.append($('<a />').addClass('any on').text('Any'));
+        }
+
+        var $ul = $('<ul />');
+
         for (var i = 0; i < item.options.length; i++) {
           var sub_item = item.options[i];
           var $li = $('<li />');
-          if (sub_item.hasOwnProperty('options') && sub_item.options.length > 0) { // if we need to recurse
+          if (sub_item.hasOwnProperty('options') && !hasValues) { // if we need to recurse
               var $a = $('<a>').attr({
                       'href': '',
                       'class': sub_item.key
@@ -71,64 +120,49 @@
                   }).text(sub_item.title);
 
                   $li.addClass('link').append($a);
-                  if (sub_item.allowAny) {
-                    $li.append($('<a />').addClass('any on').text('Any'));
-                  }
                   $li
                     .append(
                         buildMenu(sub_item)
                     );
           } else { // we need to display a value
 
-              if (allTheSame(types)) {
-                // are they integers
-                if (types[0] === typeof 1) {
-
-                  $li.append(sub_item.title);
-                  var $check = $('<input type="checkbox" class="option" name="" checked />').data({
-                          'key': sub_item.key,
-                      })
-                  $li.append($check);
-                  
-                } else if (types[0] === typeof true) {
-                  // are they booleans
-                  if (i < 1) { // onlu show one
-                    $li.append('Enabled');
-                    var $check = $('<input type="checkbox" class="option" name="" checked />').data({
-                            'key': sub_item.key,
-                        })
-                    $li.append($check);
-                  }
-                } else {
-                  // are they strings?
-
-                  $li.append(sub_item.title);
-                  var $check = $('<input type="checkbox" class="option" name="" checked />').data({
-                          'key': sub_item.key,
-                      })
-                  $li.append($check);
-                  
-                }
-              } else {       
-
-                $li.append(sub_item.title);         
-                var $check = $('<input type="checkbox" class="option" name="" checked />').data({
-                        'key': sub_item.key,
-                    })
-                $li.append($check);
-              }
+              chooseControl(sub_item);
 
           }
-          $subhtml.append($li);
+          $ul.append($li);
         }
-        return $subhtml;
+
+        if (hasValues) {
+          var $inputs = $ul.find('input');
+          // once we've drawn it's controls
+          // pick some random options based on this option's limits
+          if (item.minOptions == item.maxOptions) {
+            // select just 
+            var selectedIndices = [];
+            for (var i = item.minOptions; i <= item.maxOptions; i++) {
+              var index = Math.floor(Math.random() * $inputs.length)
+              while (selectedIndices.indexOf(index) > -1){
+                index = Math.floor(Math.random() * $inputs.length);
+              }
+              selectedIndices.push(index);
+              // TODO: include excusivity filter from content-service
+              $($inputs.get(index)).prop('checked', true);
+            }
+
+          } else if (item.minOptions < item.maxOptions) {
+            // select a random number to enable between min and max
+
+          }
+        }
+
+        return $subhtml.append($ul);
       })(menuOptions);
 
       $('#tool_settings .menu')
         .append(menuHtml)
         .height(function () {
           var h = 0;
-          $(this).find('ul').each(function () {
+          $(this).find('div.child_menu').each(function () {
             h = Math.max($(this).height() + 10, h);
           }).height(h);
           return h;
@@ -154,18 +188,19 @@
       }
 
       $('#tool_settings .menu a.any').on('click', function (e) {
-        $(this).toggleClass('on');
+        var $this = $(this);
+        $this.addClass('on');
+        $this.parent().find('li').removeClass('selected');
       });
 
-      $('#tool_settings .menu li.link').on('click', function (e) {
+      $('#tool_settings .menu li.link > a').on('click', function (e) {
           e.preventDefault();
-          var $this = $(this).find('a:first');
-          var setChanged = $this.data('changed');
+          var $this = $(this);
+          $this.parent().parent().parent().find('.any').removeClass('on'); // deselect the any
           $this.parent().parent().find('> li').removeClass('selected');
           $this.parent().addClass('selected');
-          setChanged(true);
           setQuestion();
-      })
+      });
 
       window.toolLoaded = function () {
         $('#tool_settings .menu a:first').click();
@@ -174,7 +209,6 @@
       $('input').on('change', function () {
           var setChanged = $(this).data('changed');
           setChanged($(this).is(':checked'));
-          setQuestion();
       })
     });
   });

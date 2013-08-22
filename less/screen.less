@@ -140,27 +140,26 @@ ul.tags {
     border-radius: 5px 0px 5px 5px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.5);
 }
+#tool_settings div.child_menu {
+	// display: inline;   
+    width: @menu-width;
+    border-right: 2px solid #F7EDDC;
+}
 #tool_settings ul {
     margin: 0;
     padding: 5px 0;
     list-style: none;
-    width: @menu-width;
-    border-right: 2px solid #F7EDDC;
 }
-#tool_settings li a {
-    &.any {
-    	background: #FF3400;
-    	border-radius: 3px;
-    	color: #fff;
-    	padding: 5px 10px;
-    	margin-left: 5px;
-    	margin-right: 30px;
-    	float: right;
+#tool_settings a.any {
+	background: #FF3400;
+	border-radius: 3px;
+	color: #fff;
+	padding: 5px 10px;
+	margin-left: 5px;
 
-    	&.on {
-    		background: #1C87D2;
-    	}
-    }
+	&.on {
+		background: #1C87D2;
+	}
 }
 #tool_settings > a {
     right: 0px;
@@ -182,14 +181,26 @@ ul.tags {
 #tool_settings li {
     display: block;
     text-transform: capitalize;
-    padding: 5px 10px;
-    background: #E39436;
     width: 100%;
     overflow: hidden;
     &.link {
-    	background-image: url(/img/arrow.png);
-		background-repeat: no-repeat;
-		background-position: @menu-width - 30px center;
+    	& > a {
+    		display: block;
+		    padding: 5px 10px;
+			background-color: #E39436;
+	    	background-image: url(/img/arrow.png);
+			background-repeat: no-repeat;
+			background-position: @menu-width - 30px center;
+		}
+
+		&:hover > a,
+		&.selected > a {
+			cursor: pointer;
+			background-color: #D07B1E;
+			background-image: url(/img/arrow.png);
+			background-repeat: no-repeat;
+			background-position: @menu-width - 30px center;
+		}
     }
 }
 #tool_settings li input {
@@ -200,35 +211,23 @@ ul.tags {
 #tool_settings li input {
     display: inline-block;
 }
-#tool_settings li > ul {
+#tool_settings li > div.child_menu {
     position: absolute;
     top: 0;
     left: @menu-width;
 }
 #tool_settings .built {
 	// display: none;
-	li > ul {
+	li > div.child_menu {
 		display: none;
 	}
-	li.selected > ul {
+	li.selected > div.child_menu {
 	    display: block;
 	}
-}
-#tool_settings li.link:hover,
-#tool_settings li.link.selected {
-	background: #D07B1E;
 }
 #tool_frame a:hover,
 #tool_frame li:hover > a,
 #tool_settings li.selected > a {
     color: #fff;
     text-decoration: none;
-}
-#tool_frame li.link:hover,
-#tool_settings li.link.selected {
-	cursor: pointer;
-	background-color: #D07B1E;
-	background-image: url(/img/arrow.png);
-	background-repeat: no-repeat;
-	background-position: @menu-width - 30px center;
 }
