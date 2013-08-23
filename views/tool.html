@@ -103,7 +103,7 @@
         }
 
         if (item.allowAny) {
-          $subhtml.append($('<a />').addClass('any on').text('Any'));
+          $subhtml.append($('<a />').addClass('any').addClass('on').text('Any : on'));
         }
 
         var $ul = $('<ul />');
@@ -190,13 +190,25 @@
       $('#tool_settings .menu a.any').on('click', function (e) {
         var $this = $(this);
         $this.addClass('on');
+        $this.text(function () {
+          if ($this.text().indexOf(' : off') > -1) {
+            return $this.text().replace(' : off', ' : on');
+          }
+        });
         $this.parent().find('li').removeClass('selected');
       });
 
       $('#tool_settings .menu li.link > a').on('click', function (e) {
           e.preventDefault();
           var $this = $(this);
-          $this.parent().parent().parent().find('.any').removeClass('on'); // deselect the any
+          $this.parent().parent().parent()
+            .find('> .any')
+              .removeClass('on') // deselect the any
+              .text(function () {
+                if ($(this).text().indexOf(' : on') > -1) {
+                  return $(this).text().replace(' : on', ' : off');
+                }
+              });
           $this.parent().parent().find('> li').removeClass('selected');
           $this.parent().addClass('selected');
           setQuestion();
