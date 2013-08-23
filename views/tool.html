@@ -4,13 +4,21 @@
 {% block js %}
 {% raw %}
 <script type="text/ng-template" id="tree-renderer.html">
-  <a href="" ng-click="setOptionSelected(option, $parent)">{{ option.title }}</a>
-  <div class="child_menu" ng-show="option._selected">
-    <a href="" class="any" ng-show="option.allowAny" ng-class="{true:'on'}[noOptionsSelected(option)]" ng-click="deselectOptions(option.options)">Any</a>
-    <ul>
-      <li ng-class="'link' + { true: ' selected' }[option._selected]" ng-repeat="option in mapSiblings(option)" ng-include="'tree-renderer.html'"></li>
-    </ul>
+  <div ng-switch="optionMode(option)">
+    <div ng-switch-when="0">
+      <input type="checkbox" ng-model="option._selected"><a href="" ng-click="setOptionSelected(option, $parent)">{{ option.title }}</a>
+      <div class="child_menu" ng-show="option._selected">
+          <a href="" class="any" ng-show="option.allowAny" ng-class="{true:'on'}[noOptionsSelected(option)]" ng-click="toggleAny(option)">Random</a>
+          <ul>
+            <li ng-class="'link' + { true: ' selected' }[option._selected]" ng-repeat="option in mapSiblings(option)" ng-include="'tree-renderer.html'"></li>
+          </ul>
+      </div>
+    </div>
+    <div ng-switch-when="1">
+      <label>{{ option.value }} <input type="checkbox" ng-model="option._selected" ng-change="checkOptionValid(option)"></label>
+    </div>
   </div>
+
 </script>
 {% endraw %}
 

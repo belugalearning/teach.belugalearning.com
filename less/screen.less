@@ -87,6 +87,7 @@ ul.tags {
 
 @menu-height: 150px;
 @menu-width: 180px;
+@menu-anchor-width: 150px;
 
 #tool_frame {
 	position: absolute;
@@ -184,22 +185,23 @@ ul.tags {
     width: 100%;
     overflow: hidden;
     &.link {
-    	& > a {
+    	& > div > div > a {
     		display: block;
+    		width: @menu-anchor-width;
 		    padding: 5px 10px;
 			background-color: #E39436;
 	    	background-image: url(/img/arrow.png);
 			background-repeat: no-repeat;
-			background-position: @menu-width - 30px center;
+			background-position: @menu-anchor-width - 30px center;
 		}
 
-		&:hover > a,
-		&.selected > a {
+		&:hover > div > div > a,
+		&.selected > div > div > a {
 			cursor: pointer;
 			background-color: #D07B1E;
 			background-image: url(/img/arrow.png);
 			background-repeat: no-repeat;
-			background-position: @menu-width - 30px center;
+			background-position: @menu-anchor-width - 30px center;
 		}
     }
 }
@@ -211,23 +213,23 @@ ul.tags {
 #tool_settings li input {
     display: inline-block;
 }
-#tool_settings li > div.child_menu {
+#tool_settings li > div > div > div.child_menu {
     position: absolute;
     top: 0;
     left: @menu-width;
 }
 #tool_settings .built {
 	// display: none;
-	li > div.child_menu {
+	li > div > div > div.child_menu {
 		display: none;
 	}
-	li.selected > div.child_menu {
+	li.selected > div > div > div.child_menu {
 	    display: block;
 	}
 }
 #tool_frame a:hover,
-#tool_frame li:hover > a,
-#tool_settings li.selected > a {
+#tool_frame li:hover > div > div > a,
+#tool_settings li.selected > div > div > a {
     color: #fff;
     text-decoration: none;
 }
