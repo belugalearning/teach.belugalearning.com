@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/screen.css">
   </head>
 
-  <body class="teach {% block bodyclass %}{% endblock %}">
+  <body class="teach {% block bodyclass %}{% endblock %}" ng-app="toolApp">
     {% block root %}
     <div class="beluga-shared-header navbar navbar-fixed-top">
 
@@ -115,6 +115,10 @@
     </footer>
     {% endblock %}
     <script src="//localhost:4444/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/angular.min.js"></script>
+    <script type="text/javascript" src="/js/controllers.js"></script>
+    <script type="text/javascript" src="/js/directives.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
     <script src="//localhost:4444/js/bootstrap-dropdown.js"></script>
     {% block js %}{% endblock %}
     <script>
