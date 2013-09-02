@@ -87,22 +87,22 @@ app.get('/', function(req, res) {
             ]
         },
         {
+            title: 'Splash Programming',
+            image: 'preview_splash-tool.png',
+            link: '/tools/splash/',
+            tags: [
+                'coding',
+                'logic',
+                'angle'
+            ]
+        },
+        {
             title: 'Distribution',
             image: 'preview_distribution-tool.png',
             link: '',
             tags: [
                 'sharing',
                 'division'
-            ]
-        },
-        {
-            title: 'Splash Programming',
-            image: 'preview_splash-tool.png',
-            link: '',
-            tags: [
-                'coding',
-                'logic',
-                'angle'
             ]
         },
         {
