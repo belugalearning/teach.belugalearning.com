@@ -23,5 +23,8 @@
   },
   "author": "Oliver Relph",
   "license": "BSD",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "engines": {
+    "node": "~0.8"
+  }
 }
