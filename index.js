@@ -4,14 +4,11 @@ var util = require('util')
   , cons = require('consolidate')
   , swig = require('swig')
   , express = require('express')
-  , RemoteServices = require('remote-services')
   , connect = require('connect')
   , _ = require('underscore')
 ;
 
 var localise = !!~process.argv.indexOf('--localise')
-var remoteServices = new RemoteServices();
-var serviceRole
 
 var app = express()
 app.use(express.cookieParser())
@@ -230,13 +227,5 @@ app.use('/shared-resources/', express.static(__dirname + '/tools-basis/shared-re
 app.use('/tools-tests', express.static(__dirname + '/tools-basis/tools-tests'))
 app.use('/tools', express.static(__dirname + '/tools-basis/tools'))
 
-// here's hacky way of setting the service role: find out what git branch we're on, set role to teach-[branch]
-exec('git branch -a | grep "*"', { cwd: __dirname }, function(e, text) {
-  var branch = text.match(/\* (\S+)/)[1]
-  serviceRole = util.format('teach-%s', branch)
-  console.log('serviceRole: %s', serviceRole)
-
-  var port = app.listen(localise ? 3333 : 0).address().port;
-  remoteServices.registerService(serviceRole, port);
-  console.log('listening on http://127.0.0.1:%d', port)
-})
+var port = app.listen(3333).address().port;
+console.log('listening on http://127.0.0.1:%d', port)
