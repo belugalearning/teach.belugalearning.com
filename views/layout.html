@@ -43,7 +43,12 @@
                     $('section[role=main], iframe').height(height);
                 }
 
-                var toolWindow = document.getElementById('tool').contentWindow;
+                var toolElm = document.getElementById('tool');
+                if ( !toolElm ) {
+                  return;
+                }
+
+                var toolWindow = toolElm.contentWindow;
 
                 $('#questionContent a').click(function (e) {
                     e.preventDefault();
